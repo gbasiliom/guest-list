@@ -1,0 +1,10 @@
+# Normaliza finais de linha entre Windows e Linux (a Vercel builda em Linux)
+* text=auto
+*.sh text eol=lf
+gradlew text eol=lf
+*.bat text eol=crlf
+*.ps1 text eol=crlf
+*.png binary
+*.jpg binary
+*.jar binary
+*.apk binary

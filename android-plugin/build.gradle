@@ -1,0 +1,36 @@
+// android-plugin/build.gradle
+//
+// Módulo Android (biblioteca) que implementa o plugin Capacitor
+// "EmbeddedServer" — o servidor HTTP/WebSocket embutido que roda
+// dentro do próprio app no modo offline.
+//
+// Como usar: ver INTEGRACAO_ANDROID.md na raiz deste diretório.
+
+apply plugin: 'com.android.library'
+apply plugin: 'kotlin-android'
+
+android {
+    namespace 'br.com.aguilda.embeddedserver'
+    compileSdk 34
+
+    defaultConfig {
+        minSdk 22
+        targetSdk 34
+    }
+
+    compileOptions {
+        sourceCompatibility JavaVersion.VERSION_17
+        targetCompatibility JavaVersion.VERSION_17
+    }
+
+    kotlinOptions {
+        jvmTarget = '17'
+    }
+}
+
+dependencies {
+    implementation project(':capacitor-android') // fornecido pelo projeto Capacitor gerado
+    implementation "org.nanohttpd:nanohttpd:2.3.1"
+    implementation "org.nanohttpd:nanohttpd-websocket:2.3.1"
+    implementation "org.json:json:20240303"
+}

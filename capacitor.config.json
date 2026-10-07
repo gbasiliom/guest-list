@@ -1,0 +1,9 @@
+{
+  "appId": "br.com.aguilda.recepcaovisitantes",
+  "appName": "Guest List",
+  "webDir": "dist",
+  "server": {
+    "androidScheme": "http",
+    "cleartext": true
+  }
+}

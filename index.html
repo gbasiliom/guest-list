@@ -1,0 +1,42 @@
+<!doctype html>
+<html lang="pt-BR">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no" />
+    <title>Guest List</title>
+    <!-- Diagnóstico: se a página não carregar (WebView antigo, erro de JS), escreve o motivo na tela em vez de ficar preta. Código ES5 de propósito. -->
+    <script>
+      (function () {
+        function mostrar(msg) {
+          var d = document.createElement('div');
+          d.style.cssText = 'padding:16px;font:14px/1.4 monospace;color:#ff8b8b;background:#111318;white-space:pre-wrap;word-break:break-word';
+          d.textContent = msg;
+          (document.body || document.documentElement).appendChild(d);
+        }
+        window.onerror = function (m, src, l, c) {
+          mostrar('ERRO: ' + m + '\n(' + (src || '') + ':' + l + ':' + c + ')');
+        };
+        window.addEventListener('unhandledrejection', function (e) {
+          mostrar('ERRO (promise): ' + ((e.reason && e.reason.message) || e.reason));
+        });
+        window.addEventListener('load', function () {
+          setTimeout(function () {
+            var r = document.getElementById('root');
+            if (r && !r.firstChild) {
+              mostrar('A tela nao carregou.\nWebView: ' + navigator.userAgent);
+            }
+          }, 2500);
+        });
+      })();
+    </script>
+    <script nomodule>
+      document.addEventListener('DOMContentLoaded', function () {
+        document.body.innerHTML = '<p style="color:#fff;padding:16px;font:16px sans-serif">WebView muito antigo. Atualize o "Android System WebView" na Play Store.</p>';
+      });
+    </script>
+  </head>
+  <body>
+    <div id="root"></div>
+    <script type="module" src="/src/main.jsx"></script>
+  </body>
+</html>

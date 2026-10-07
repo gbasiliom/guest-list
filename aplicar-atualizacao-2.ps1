@@ -1,0 +1,107 @@
+# aplicar-atualizacao-2.ps1  (arquivo ASCII)
+# Rode na pasta do projeto: powershell -ExecutionPolicy Bypass -File .\aplicar-atualizacao-2.ps1
+$ErrorActionPreference = 'Stop'
+if (-not (Test-Path '.\package.json') -or -not (Test-Path '.\android')) {
+  Write-Host 'ERRO: rode este script dentro de C:\Projetos\recepcao-visitantes' -ForegroundColor Red
+  exit 1
+}
+$raiz = (Get-Location).Path
+
+$b64 = @'
+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
+5JSFIcn8Q3TutbrALcqiCa24dt96lMn9FGI3YK0cXce+KqbLnEdAai9q+HeEWXeu3Yh9TRoTjQZl2dGithol5vLiZaVvUiEc00um
+N87oXAMMUQacEW5pUFgdbXh/eoiLuDaW+IO5LLepUC5JDVf977mTVik1+CCOc4v4cwFU8K5QKDc3yi7ixL4Q33fjr5NNAIVBmEwG
+kdDybylaVgqmhj3ZtQuRKsYc3rhd0CxjksGv15/QdaqUlk97F6XGciAnu+Z8ckjQGMWM36+rVEmppN5VcZpyoZd1TcOuxWkw3H9O
+R527Ymj9j4fVzI7qGXe1yjJxW3FvqK3oyWBMXwBtS16Nt6/t43tx2J6+U3GO7W51dilDnvEwZcItdL+K3Bv+a2y8RptqWeMbpS2G
+X7ndtkflnvGEabx46U9wV4TG8HY2WPbTFiWQwmOMWEnOwAgrhzu81RjTwws7toRj8Hs5/gn8r7a83+LS0tfV/29StyOas1At4n/q
+SYnVeGFXUUngADrAeaQTLcuxf9VX7uXeb1BLAQIUAxQAAAAIABtKR11rqqmUIAwAAIssAABQAAAAAAAAAAAAAACkgQAAAABhbmRy
+b2lkLXBsdWdpbi9zcmMvbWFpbi9qYXZhL2JyL2NvbS9hZ3VpbGRhL2VtYmVkZGVkc2VydmVyL1JlY2VwY2FvSHR0cFNlcnZlci5r
+dFBLAQIUAxQAAAAIAENKR13j9mEgqgIAACsIAABKAAAAAAAAAAAAAACkgY4MAABhbmRyb2lkLXBsdWdpbi9zcmMvbWFpbi9qYXZh
+L2JyL2NvbS9hZ3VpbGRhL2VtYmVkZGVkc2VydmVyL21vZGVsL0dydXBvcy5rdFBLBQYAAAAAAgACAPYAAACgDwAAAAA=
+'@
+
+Add-Type -AssemblyName System.IO.Compression
+Add-Type -AssemblyName System.IO.Compression.FileSystem
+$bytes = [Convert]::FromBase64String(($b64 -replace '\s',''))
+$ms = New-Object System.IO.MemoryStream(,$bytes)
+$zip = New-Object System.IO.Compression.ZipArchive($ms)
+foreach ($e in $zip.Entries) {
+  if ([string]::IsNullOrEmpty($e.Name)) { continue }
+  $destino = Join-Path $raiz ($e.FullName -replace '/', '\')
+  New-Item -ItemType Directory -Force -Path (Split-Path $destino) | Out-Null
+  $entrada = $e.Open()
+  $saida = [System.IO.File]::Create($destino)
+  $entrada.CopyTo($saida)
+  $saida.Close()
+  $entrada.Close()
+  Write-Host ('OK  atualizado: ' + $e.FullName)
+}
+$zip.Dispose()
+
+Write-Host '--- npm run build ---'
+npm run build
+if ($LASTEXITCODE -ne 0) { Write-Host 'ERRO no npm run build' -ForegroundColor Red; exit 1 }
+
+Write-Host '--- cap sync ---'
+npx cap sync android
+if ($LASTEXITCODE -ne 0) { Write-Host 'ERRO no cap sync' -ForegroundColor Red; exit 1 }
+
+Write-Host '--- gradle assembleDebug ---'
+Push-Location (Join-Path $raiz 'android')
+.\gradlew assembleDebug
+$codigo = $LASTEXITCODE
+Pop-Location
+if ($codigo -ne 0) { Write-Host 'ERRO no gradle' -ForegroundColor Red; exit 1 }
+
+$apk = Join-Path $raiz 'android\app\build\outputs\apk\debug'
+Write-Host ''
+Write-Host 'PRONTO. APK novo em:' -ForegroundColor Green
+Write-Host ($apk + '\app-debug.apk')
+explorer $apk

@@ -1,0 +1,31 @@
+# dependencias e build do front-end
+node_modules/
+dist/
+
+# segredos locais
+.env
+.env.*
+!.env.example
+
+# Android (gerado pelo build)
+android/.gradle/
+android/build/
+android/app/build/
+android/local.properties
+android/.idea/
+android/app/src/main/assets/public/
+android/app/src/main/assets/capacitor.config.json
+android/app/src/main/assets/capacitor.plugins.json
+android/capacitor-cordova-android-plugins/
+*.apk
+*.aab
+*.iml
+.gradle/
+local.properties
+
+# sistema / editor
+.DS_Store
+Thumbs.db
+.vscode/
+.idea/
+*.log
