@@ -1,4 +1,4 @@
-﻿package br.com.aguilda.embeddedserver.model
+package br.com.aguilda.embeddedserver.model
 
 object Expiracao {
 
